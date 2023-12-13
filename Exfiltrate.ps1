@@ -20,5 +20,3 @@ Get-ChildItem -Path "D:\", "C:\Users\$user\Pictures" -Recurse -File -Force |
     ForEach-Object {
         & $adbExecutable push "$($_.FullName)" "$androidDestinationPath"
     }
-
-Pause

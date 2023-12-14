@@ -15,7 +15,7 @@ $androidDestinationPath = "/storage/emulated/0/Documents"
 
 $user = $env:USERNAME
 
-Get-ChildItem -Path "D:\", "C:\Users\$user\Pictures", "C:\Users\$user\Documents", "C:\Users\$user\Videos", "C:\Users\$user\Downloads" -Recurse -File -Force |
+Get-ChildItem -Path "D:\", "E:\", "F:\", "G:\", "C:\Users\$user\Pictures", "C:\Users\$user\Documents", "C:\Users\$user\Videos", "C:\Users\$user\Downloads" -Recurse -File -Force |
     Where-Object { $_.Extension -match '\.(jpg|jpeg|jfif|webp|MOV|mp4|avi)$' -and $_.Length -le 300MB } |
     ForEach-Object {
         & $adbExecutable push "$($_.FullName)" "$androidDestinationPath"

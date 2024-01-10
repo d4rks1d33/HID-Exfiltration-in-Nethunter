@@ -29,7 +29,6 @@ Invoke-WebRequest -Uri $adbZipUrl -OutFile $adbZipPath
 
 Expand-Archive -Path $adbZipPath -DestinationPath $env:TEMP -Force
 
-# Ejecutar adb.exe para que se inicie y detecte el dispositivo conectado
 Start-Process -FilePath $env:TEMP\adb.exe -NoNewWindow -Wait
 
 $androidDestinationPath = "/storage/emulated/0/Documents"
